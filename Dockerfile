@@ -11,11 +11,12 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y libsnappy1v5 libz
 RUN wget -O- 'https://bitcoincore.org/bin/bitcoin-core-25.1/bitcoin-25.1-x86_64-linux-gnu.tar.gz' | tar xz -C /usr/bin/ 'bitcoin-25.1/bin/bitcoind' --strip-components=2
 RUN wget -O- 'https://archive.torproject.org/tor-package-archive/torbrowser/13.0.6/tor-expert-bundle-linux-x86_64-13.0.6.tar.gz' | tar xz -C /usr/bin/ 'tor/tor' 'tor/libevent-2.1.so.7' --strip-components=1 && mv /usr/bin/libevent-2.1.so.7 /usr/lib/ && chmod 755 /usr/bin/tor /usr/lib/libevent-2.1.so.7
 COPY --from=builder /usr/bin/blockbook /usr/bin/blockbook
+COPY torrc /etc/tor/torrc
 COPY bitcoin.conf /etc/bitcoin/bitcoin.conf
-COPY torrc-bitcoin /etc/tor/torrc
-COPY torrc-tbitcoin /etc/tor/testnet3/torrc
-COPY blockchaincfg-bitcoin.json /etc/blockbook/blockchaincfg.json
-COPY blockchaincfg-tbitcoin.json /etc/blockbook/testnet3/blockchaincfg.json
+COPY blockchaincfg.json /etc/blockbook/blockchaincfg.json
+COPY testnet3/torrc /etc/tor/testnet3/torrc
+COPY testnet3/bitcoin.conf /etc/bitcoin/testnet3/bitcoin.conf
+COPY testnet3/blockchaincfg.json /etc/blockbook/testnet3/blockchaincfg.json
 RUN useradd -U -m ubuntu
 USER ubuntu
 WORKDIR /home/ubuntu/
@@ -23,6 +24,6 @@ COPY --from=builder /opt/blockbook/static/ /home/ubuntu/static/
 ENV TESTNET=
 ENTRYPOINT \
 	tor -f /etc/tor${TESTNET:+/testnet3}/torrc & \
-	bitcoind -conf=/etc/bitcoin/bitcoin.conf -nodebuglogfile ${TESTNET:+-testnet} & \
+	bitcoind -conf=/etc/bitcoin${TESTNET:+/testnet3}/bitcoin.conf -nodebuglogfile & \
 	blockbook -blockchaincfg=/etc/blockbook${TESTNET:+/testnet3}/blockchaincfg.json -datadir=/home/ubuntu/datadir/blockbook${TESTNET:+/testnet3}/ -enablesubnewtx -extendedindex -logtostderr -public=127.0.0.1:${TESTNET:+1}9130 -sync & \
 	wait
