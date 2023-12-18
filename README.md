@@ -26,6 +26,10 @@ To retrieve the block explorer .onion address, use the following command:
 One can then access the block explorer by accessing this .onion address via a
 web browser that supports Tor, such as the [Brave Browser](https://brave.com).
 
+Be patient, it may take several hours before the service is fully synchronized
+with the Bitcoin network. You will also need to have enough disk space to store
+the full blockchain and its indexed database (1.3TB as of December/2023).
+
 ## Overview
 
 This is a Docker image furnished with a couple of scripts to start and stop it.
