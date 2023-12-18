@@ -75,8 +75,8 @@ please add the account to the docker group by running:.
 
     $ sudo usermod -aG docker $USER
 
-(Note that you may need to log out and log back in to your session for this
-last change to take effect.)
+You may need to log out and log back in to your session for this last change
+to take effect.
 
 ## Storage
 
@@ -94,4 +94,4 @@ security measures to keep it secret.
 The other two folders contain public data that can be safely recreated from the
 blockchain via synchronization.
 
-_(Docker 24.0.7 on Ubuntu 22.04)_
+_(Tested with Docker 24.0.7 on Ubuntu 22.04)_
