@@ -49,31 +49,32 @@ top-level domain). The setup is intended to force all network traffic
 via a Tor proxy, including blockchain synchronization.
 
 To avoid clearnet traffic, DNS query for seed nodes is disabled. To bootstrap
-peers it relies solely on hardcoded .onion addresses provided by bitcoind.
+peers, it relies solely on hard-coded .onion addresses provided by bitcoind.
 
-The hidden services configuration for the full node resides inside the Docker
+The hidden service configuration for the full node resides inside the Docker
 container, its .onion address is lost/refreshed on every start/stop cycle.
-The hidden services configuration for the block explorer is stored in the
-host's data folder, its .onion address is kept accross runs.
+The hidden service configuration for the block explorer is stored in the
+host's data folder, its .onion address is kept across runs.
 
 During execution, the full node becomes available as a peer on the Bitcoin
 network, but it does not expose REST/RPC services. On the other hand, the block
-explorer exposes its web front-end and REST API. From the point of view of
-an outsider, they are different and unrelated nodes in the Tor network.
+explorer exposes its web front and [REST API](https://github.com/trezor/blockbook/blob/master/docs/api.md).
+From the point of view of an outsider, they are different and unrelated nodes
+in the Tor network.
 
-As the full node is used as back-end for the block explorer, its wallet
+As the full node is used solely as back-end for the block explorer, its wallet
 functionality is disabled.
 
 ## Prerequisite
 
-In order to run the application it is necessary to
+In order to run the application, it is necessary to
 [install the Docker engine](https://docs.docker.com/engine/install/)
-on the host machine. On Debian-based systems it suffices to install the
+on the host machine. On Debian-based systems, it suffices to install the
 default distribution version by running:
 
     $ sudo apt-get install -y docker.io
 
-It also makes sense to setup the Docker engine to
+It also makes sense to set up the Docker engine to
 [start on boot](https://docker-docs.uclv.cu/engine/install/linux-postinstall/#configure-docker-to-start-on-boot).
 On systems using `systemd` that can be achieved by running:
 
