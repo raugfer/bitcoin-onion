@@ -3,6 +3,26 @@
 This repository provides the setup needed for running a Bitcoin block explorer
 on the Tor network, with minimal effort.
 
+## Usage
+
+(Make sure you have [Docker installed](https://github.com/raugfer/bitcoin-onion#prerequisite).)
+
+Clone this repository and enter its folder:
+
+    $ git clone https://github.com/raugfer/bitcoin-onion && cd bitcoin-onion
+
+To initiate the block explorer, use the following command:
+
+    $ ./bitcoin-start --daemon
+
+To terminate the block explorer, gracefully, use the following command:
+
+    $ ./bitcoin-stop
+
+To retrieve the block explorer .onion address, use the following command:
+
+    $ cat datadir/onion/hostname
+
 ## Overview
 
 This is a Docker image furnished with a couple of scripts to start and stop it.
@@ -45,29 +65,18 @@ default distribution version by running:
 
 It also makes sense to setup the Docker engine to
 [start on boot](https://docker-docs.uclv.cu/engine/install/linux-postinstall/#configure-docker-to-start-on-boot).
-On systems using the systemd that can be achieved by running:
+On systems using the `systemd` that can be achieved by running:
 
     $ sudo systemctl enable docker
 
 Finally, if you intend to [run docker on a non-root account](https://docker-docs.uclv.cu/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user),
-please add the account to the docker group by running (you may need to log out
-and log back into your session for this change to take effect):
+please add the account to the docker group by running:.
+
 
     $ sudo usermod -aG docker $USER
 
-## Usage
-
-To initiate the block explorer, use the following command:
-
-    $ ./bitcoin-start --daemon
-
-To terminate the block explorer, gracefully, use the following command:
-
-    $ ./bitcoin-stop
-
-To retrieve the block explorer .onion address, use the following command:
-
-    $ cat datadir/onion/hostname
+(Note that you may need to log out and log back in to your session for this
+last change to take effect.)
 
 ## Storage
 
