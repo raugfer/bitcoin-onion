@@ -23,6 +23,9 @@ To retrieve the block explorer .onion address, use the following command:
 
     $ cat datadir/onion/hostname
 
+One can then access the block explorer by accessing this .onion address via a
+web browser that supports Tor, such as the [Brave Browser](https://brave.com).
+
 ## Overview
 
 This is a Docker image furnished with a couple of scripts to start and stop it.
@@ -70,8 +73,7 @@ On systems using `systemd` that can be achieved by running:
     $ sudo systemctl enable docker
 
 Finally, if you intend to [run docker on a non-root account](https://docker-docs.uclv.cu/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user),
-please add the account to the docker group by running:.
-
+please add the account to the docker group by running:
 
     $ sudo usermod -aG docker $USER
 
