@@ -11,6 +11,7 @@ The image is composed of 3 components: the Bitcoin full node ([Bitcoin Core](htt
 the Bitcoin block explorer front-end ([Blockbook](https://trezor.io/learn/a/trezor-blockbook-explorer)),
 and the Tor network proxy ([Tor](https://www.torproject.org/)).
 
+| Component    | Version                                                                                                                     |
 | ------------ | --------------------------------------------------------------------------------------------------------------------------- |
 | Bitcoin Core | [25.1](https://bitcoincore.org/bin/bitcoin-core-25.1/bitcoin-25.1-x86_64-linux-gnu.tar.gz)                                  |
 | Blockbook    | [Commit f4d06ab](ttps://github.com/trezor/blockbook.git)                                                                    |
