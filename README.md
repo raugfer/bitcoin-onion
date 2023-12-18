@@ -57,7 +57,7 @@ The hidden services configuration for the block explorer is stored in the
 host's data folder, its .onion address is kept accross runs.
 
 During execution, the full node becomes available as a peer on the Bitcoin
-network, but it does expose REST/RPC services. On the other hand, the block
+network, but it does not expose REST/RPC services. On the other hand, the block
 explorer exposes its web front-end and REST API. From the point of view of
 an outsider, they are different and unrelated nodes in the Tor network.
 
