@@ -11,9 +11,11 @@ The image is composed of 3 components: the Bitcoin full node ([Bitcoin Core](htt
 the Bitcoin block explorer front-end ([Blockbook](https://trezor.io/learn/a/trezor-blockbook-explorer)),
 and the Tor network proxy ([Tor](https://www.torproject.org/)).
 
-| Bitcoin Core | [25.1](https://bitcoincore.org/bin/bitcoin-core-25.1/bitcoin-25.1-x86_64-linux-gnu.tar.gz)                                                                                                           |
-| Blockbook    | [Commit f4d06ab](ttps://github.com/trezor/blockbook.git) ([Rocks DB 7.7.2](https://github.com/facebook/rocksdb.git /opt/rocksdb/), [Go 1.21.4](https://dl.google.com/go/go1.21.4.linux-amd64.tar.gz) |
-| Tor          | [13.0.6](https://archive.torproject.org/tor-package-archive/torbrowser/13.0.6/tor-expert-bundle-linux-x86_64-13.0.6.tar.gz)                                                                          |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| Bitcoin Core | [25.1](https://bitcoincore.org/bin/bitcoin-core-25.1/bitcoin-25.1-x86_64-linux-gnu.tar.gz)                                  |
+| Blockbook    | [Commit f4d06ab](ttps://github.com/trezor/blockbook.git)                                                                    |
+| Tor          | [13.0.6](https://archive.torproject.org/tor-package-archive/torbrowser/13.0.6/tor-expert-bundle-linux-x86_64-13.0.6.tar.gz) |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------- |
 
 Both the full node and the block explorer run as Tor hidden services (.onion
 top-level domain). The setup is intended to force all network traffic
