@@ -1,11 +1,11 @@
 # Bitcoin Onion
 
-This repository provides the setup needed for running a Bitcoin block explorer
-on the Tor network, with minimal effort.
+This repository provides the setup needed to run a Bitcoin block explorer on
+the Tor network, with minimal effort.
 
 ## Usage
 
-(Make sure you have [Docker installed](https://github.com/raugfer/bitcoin-onion#prerequisite).)
+First, make sure you have [Docker installed](https://github.com/raugfer/bitcoin-onion#prerequisite).
 
 Clone this repository and enter its folder:
 
@@ -65,7 +65,7 @@ default distribution version by running:
 
 It also makes sense to setup the Docker engine to
 [start on boot](https://docker-docs.uclv.cu/engine/install/linux-postinstall/#configure-docker-to-start-on-boot).
-On systems using the `systemd` that can be achieved by running:
+On systems using `systemd` that can be achieved by running:
 
     $ sudo systemctl enable docker
 
