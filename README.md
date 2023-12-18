@@ -61,6 +61,9 @@ network, but it does not expose REST/RPC services. On the other hand, the block
 explorer exposes its web front-end and REST API. From the point of view of
 an outsider, they are different and unrelated nodes in the Tor network.
 
+As the full node is used as back-end for the block explorer, its wallet
+functionality is disabled.
+
 ## Prerequisite
 
 In order to run the application it is necessary to
