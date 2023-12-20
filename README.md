@@ -23,6 +23,9 @@ To retrieve the block explorer .onion address, use the following command:
 
     $ cat datadir/onion/hostname
 
+Be aware that, at first run, it needs to download and build the software. This
+may take several minutes.
+
 One can then access the block explorer by accessing this .onion address via a
 web browser that supports Tor, such as the [Brave Browser](https://brave.com).
 
@@ -41,7 +44,7 @@ proxy (Tor).
 | Component                                                        | Version                                                                                                                     |
 | ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | [Bitcoin Core](https://bitcoincore.org/)                         | [25.1](https://bitcoincore.org/bin/bitcoin-core-25.1/bitcoin-25.1-x86_64-linux-gnu.tar.gz)                                  |
-| [Blockbook](https://trezor.io/learn/a/trezor-blockbook-explorer) | [Commit f4d06ab](https://github.com/trezor/blockbook.git)                                                                   |
+| [Blockbook](https://trezor.io/learn/a/trezor-blockbook-explorer) | [Commit f4d06ab](https://github.com/trezor/blockbook/commit/f4d06ab)                                                        |
 | [Tor](https://www.torproject.org/)                               | [13.0.6](https://archive.torproject.org/tor-package-archive/torbrowser/13.0.6/tor-expert-bundle-linux-x86_64-13.0.6.tar.gz) |
 
 Both the full node and the block explorer run as Tor hidden services (.onion
