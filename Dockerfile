@@ -20,7 +20,10 @@ COPY testnet3/blockchaincfg.json /etc/blockbook/testnet3/blockchaincfg.json
 RUN useradd -U -m ubuntu
 USER ubuntu
 WORKDIR /home/ubuntu/
-COPY --from=builder /opt/blockbook/static/ /home/ubuntu/static/
+COPY --from=builder --chown=ubuntu:ubuntu /opt/blockbook/static/ /home/ubuntu/static/
+COPY base.html /home/ubuntu/static/templates/
+COPY index.html /home/ubuntu/static/templates/
+RUN rm /home/ubuntu/static/favicon.ico
 ENV TESTNET=
 ENTRYPOINT \
 	tor -f /etc/tor${TESTNET:+/testnet3}/torrc & \
