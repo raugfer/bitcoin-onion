@@ -5,8 +5,8 @@ USAGE="usage: $0 [--daemon] [--testnet]"
 [ "$#" -gt 2 ] && echo $USAGE && exit 1
 DAEMON=$([ "$1" = "--daemon" ] && echo "-d --restart unless-stopped" || echo "-it --rm")
 ([ "$1" = "--testnet" ] || [ "$2" = "--testnet" ]) && TESTNET="t"
-docker build -q -t bitcoin:0.25.1 `dirname $0` > /dev/null || exit 1
+docker build -q -t bitcoin:0.26.0 `dirname $0` > /dev/null || exit 1
 mkdir -p `dirname $0`/datadir/bitcoin/ `dirname $0`/datadir/blockbook/ `dirname $0`/datadir/onion/
 chmod -f 700 `dirname $0`/datadir/onion/
 rm -f `dirname $0`/datadir/bitcoin/onion_v3_private_key `dirname $0`/datadir/bitcoin/testnet3/onion_v3_private_key
-docker run $DAEMON --name $TESTNET"bitcoin" --hostname $TESTNET"bitcoin" -v `dirname $0`/datadir/:/home/ubuntu/datadir/ -e TESTNET=$TESTNET bitcoin:0.25.1
+docker run $DAEMON --name $TESTNET"bitcoin" --hostname $TESTNET"bitcoin" -v `dirname $0`/datadir/:/home/ubuntu/datadir/ -e TESTNET=$TESTNET bitcoin:0.26.0
