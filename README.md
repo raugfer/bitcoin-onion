@@ -45,7 +45,7 @@ proxy (Tor).
 | ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | [Bitcoin Core](https://bitcoincore.org/)                         | [26.0](https://bitcoincore.org/bin/bitcoin-core-26.0/bitcoin-26.0-x86_64-linux-gnu.tar.gz)                                  |
 | [Blockbook](https://trezor.io/learn/a/trezor-blockbook-explorer) | [Commit f4d06ab](https://github.com/trezor/blockbook/commit/f4d06ab)                                                        |
-| [Tor](https://www.torproject.org/)                               | [13.0.6](https://archive.torproject.org/tor-package-archive/torbrowser/13.0.6/tor-expert-bundle-linux-x86_64-13.0.6.tar.gz) |
+| [Tor](https://www.torproject.org/)                               | [13.0.7](https://archive.torproject.org/tor-package-archive/torbrowser/13.0.7/tor-expert-bundle-linux-x86_64-13.0.7.tar.gz) |
 
 Both the full node and the block explorer run as Tor hidden services (.onion
 top-level domain). The setup is intended to force all network traffic

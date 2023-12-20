@@ -9,7 +9,7 @@ RUN cd /opt/blockbook/ && CGO_CFLAGS='-I/opt/rocksdb/include/' CGO_LDFLAGS='-L/o
 FROM ubuntu:22.04
 RUN apt-get update && apt-get upgrade -y && apt-get install -y libsnappy1v5 libzmq5 wget && apt-get clean
 RUN wget -O- 'https://bitcoincore.org/bin/bitcoin-core-26.0/bitcoin-26.0-x86_64-linux-gnu.tar.gz' | tar xz -C /usr/bin/ 'bitcoin-26.0/bin/bitcoind' --strip-components=2
-RUN wget -O- 'https://archive.torproject.org/tor-package-archive/torbrowser/13.0.6/tor-expert-bundle-linux-x86_64-13.0.6.tar.gz' | tar xz -C /usr/bin/ 'tor/tor' 'tor/libevent-2.1.so.7' --strip-components=1 && mv /usr/bin/libevent-2.1.so.7 /usr/lib/ && chmod 755 /usr/bin/tor /usr/lib/libevent-2.1.so.7
+RUN wget -O- 'https://archive.torproject.org/tor-package-archive/torbrowser/13.0.7/tor-expert-bundle-linux-x86_64-13.0.7.tar.gz' | tar xz -C /usr/bin/ 'tor/tor' 'tor/libevent-2.1.so.7' --strip-components=1 && mv /usr/bin/libevent-2.1.so.7 /usr/lib/ && chmod 755 /usr/bin/tor /usr/lib/libevent-2.1.so.7
 COPY --from=builder /usr/bin/blockbook /usr/bin/blockbook
 COPY torrc /etc/tor/torrc
 COPY bitcoin.conf /etc/bitcoin/bitcoin.conf
