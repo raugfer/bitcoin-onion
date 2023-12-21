@@ -1,6 +1,7 @@
 DataDirectory /home/ubuntu/tor/
 ControlPort 127.0.0.1:9051
 CookieAuthentication 1
+DNSPort 127.0.0.1:53
 HiddenServiceDir /home/ubuntu/onion/
 HiddenServicePort 8333 127.0.0.1:8334
 HiddenServiceDir /home/ubuntu/datadir/onion/
