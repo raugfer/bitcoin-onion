@@ -1,4 +1,5 @@
 DataDirectory /home/ubuntu/tor/
+SOCKSPort 127.0.0.1:9050
 ControlPort 127.0.0.1:9051
 CookieAuthentication 1
 DNSPort 127.0.0.1:53
