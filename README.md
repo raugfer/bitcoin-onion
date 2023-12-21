@@ -51,8 +51,8 @@ Both the full node and the block explorer run as Tor hidden services (.onion
 top-level domain). The setup is intended to force all network traffic
 via a Tor proxy, including blockchain synchronization.
 
-To avoid clearnet traffic, DNS query for seed nodes is disabled. To bootstrap
-peers, it relies solely on hard-coded .onion addresses provided by bitcoind.
+DNS query for seed nodes is disabled. To bootstrap peers, it relies solely
+on hard-coded .onion addresses provided by bitcoind.
 
 The hidden service configuration for the full node resides inside the Docker
 container, its .onion address is lost/refreshed on every start/stop cycle.
