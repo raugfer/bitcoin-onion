@@ -30,5 +30,5 @@ ENV TESTNET=
 ENTRYPOINT \
 	tor -f /etc/tor${TESTNET:+/testnet3}/torrc & \
 	bitcoind -conf=/etc/bitcoin${TESTNET:+/testnet3}/bitcoin.conf -nodebuglogfile & \
-	blockbook -blockchaincfg=/etc/blockbook${TESTNET:+/testnet3}/blockchaincfg.json -datadir=/home/ubuntu/datadir/blockbook${TESTNET:+/testnet3}/ -enablesubnewtx -extendedindex -logtostderr -public=127.0.0.1:${TESTNET:+1}9130 -sync & \
+	blockbook -blockchaincfg=/etc/blockbook${TESTNET:+/testnet3}/blockchaincfg.json -datadir=/home/ubuntu/datadir/blockbook${TESTNET:+/testnet3}/ -enablesubnewtx -extendedindex -logtostderr -public=127.0.0.1:${TESTNET:+1}9130 -sync -workers=1 & \
 	wait
