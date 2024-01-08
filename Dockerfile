@@ -1,17 +1,18 @@
 FROM ubuntu:22.04 AS builder
-RUN apt-get update && apt-get upgrade -y && apt-get install -y g++ git libevent-dev liblz4-dev libsnappy-dev libssl-dev libzmq3-dev libzstd-dev make pkg-config wget zlib1g-dev && apt-get clean
-RUN mkdir -p /opt/tor/ && wget -O- 'https://dist.torproject.org/tor-0.4.8.10.tar.gz' | tar xz -C /opt/tor/ --strip-components=1
-RUN git clone -b 'v7.7.2' --depth 1 https://github.com/facebook/rocksdb.git /opt/rocksdb/
-RUN wget -O- 'https://dl.google.com/go/go1.21.4.linux-amd64.tar.gz' | tar xz -C /opt/ && ln -s /opt/go/bin/go /usr/bin/go
-RUN git clone https://github.com/trezor/blockbook.git /opt/blockbook/ && cd /opt/blockbook/ && git checkout f4d06ab
-RUN cd /opt/tor/ && ./configure && make && make install
+RUN apt-get update && apt-get upgrade -y && apt-get install -y autoconf g++ git golang libboost-dev libevent-dev liblz4-dev libsnappy-dev libssl-dev libtool libzmq3-dev libzstd-dev make pkg-config wget zlib1g-dev && apt-get clean
+RUN git clone https://gitlab.torproject.org/tpo/core/tor.git /opt/tor/ && cd /opt/tor/ && git checkout '680415826c5fd7862e65eeeefe0d98b905714f83'
+RUN git clone https://github.com/bitcoin/bitcoin.git /opt/bitcoin/ && cd /opt/bitcoin/ && git checkout '44d8b13c81e5276eb610c99f227a4d090cc532f6'
+RUN git clone https://github.com/facebook/rocksdb.git /opt/rocksdb/ && cd /opt/rocksdb/ && git checkout '59495ff26a410eab30dab4f76b76ec5ba4ad293b'
+RUN git clone https://github.com/trezor/blockbook.git /opt/blockbook/ && cd /opt/blockbook/ && git checkout 'f4d06ab08d2e883ac63bc4a62de65a8afb5b51c5'
+RUN cd /opt/tor/ && ./autogen.sh && ./configure --disable-asciidoc --disable-unittests && make && make install
+RUN cd /opt/bitcoin/ && ./autogen.sh && ./configure CXXFLAGS='-O2' CFLAGS='-O2' --disable-wallet --disable-bench --disable-tests --disable-fuzz-binary --without-gui --without-natpmp --without-miniupnpc --without-utils --without-libs --enable-reduce-exports && make && make install
 RUN cd /opt/rocksdb/ && make release
 RUN cd /opt/blockbook/ && CGO_CFLAGS='-I/opt/rocksdb/include/' CGO_LDFLAGS='-L/opt/rocksdb/' go build -o /usr/bin/blockbook -ldflags='-s -w -X github.com/trezor/blockbook/common.version=0.4.0 -X github.com/trezor/blockbook/common.gitcommit=f4d06ab -X github.com/trezor/blockbook/common.buildtime=2023-12-05T10:58:21+00:00'
 
 FROM ubuntu:22.04
-RUN apt-get update && apt-get upgrade -y && apt-get install -y libevent-dev libsnappy1v5 libzmq5 supervisor wget && apt-get clean
-RUN wget -O- 'https://bitcoincore.org/bin/bitcoin-core-26.0/bitcoin-26.0-x86_64-linux-gnu.tar.gz' | tar xz -C /usr/bin/ 'bitcoin-26.0/bin/bitcoind' --strip-components=2
+RUN apt-get update && apt-get upgrade -y && apt-get install -y libevent-dev libsnappy1v5 libzmq5 supervisor && apt-get clean
 COPY --from=builder /usr/local/bin/tor /usr/bin/tor
+COPY --from=builder /usr/local/bin/bitcoind /usr/bin/bitcoind
 COPY --from=builder /usr/bin/blockbook /usr/bin/blockbook
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY torrc /etc/tor/torrc

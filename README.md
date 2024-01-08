@@ -41,11 +41,11 @@ The image is composed of 3 components: the Bitcoin full node (Bitcoin Core),
 the Bitcoin block explorer front-end (Blockbook), and the Tor network
 proxy (Tor).
 
-| Component                                                        | Version                                                                                                                     |
-| ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| [Bitcoin Core](https://bitcoincore.org/)                         | [26.0](https://bitcoincore.org/bin/bitcoin-core-26.0/bitcoin-26.0-x86_64-linux-gnu.tar.gz)                                  |
-| [Blockbook](https://trezor.io/learn/a/trezor-blockbook-explorer) | [Commit f4d06ab](https://github.com/trezor/blockbook/commit/f4d06ab)                                                        |
-| [Tor](https://www.torproject.org/)                               | [13.0.7](https://archive.torproject.org/tor-package-archive/torbrowser/13.0.7/tor-expert-bundle-linux-x86_64-13.0.7.tar.gz) |
+| Component                                                        | Version                                                                                                  |
+| ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| [Bitcoin Core](https://bitcoincore.org/)                         | [26.0](https://github.com/bitcoin/bitcoin/commit/44d8b13c81e5276eb610c99f227a4d090cc532f6)               |
+| [Blockbook](https://trezor.io/learn/a/trezor-blockbook-explorer) | [Commit f4d06ab](https://github.com/trezor/blockbook/commit/f4d06ab08d2e883ac63bc4a62de65a8afb5b51c5)    |
+| [Tor](https://www.torproject.org/)                               | [0.4.8.10](https://gitlab.torproject.org/tpo/core/tor/-/commit/680415826c5fd7862e65eeeefe0d98b905714f83) |
 
 Both the full node and the block explorer run as Tor hidden services (.onion
 top-level domain). The setup is intended to force all network traffic
