@@ -9,13 +9,15 @@ RUN cd /opt/rocksdb/ && make release
 RUN cd /opt/blockbook/ && CGO_CFLAGS='-I/opt/rocksdb/include/' CGO_LDFLAGS='-L/opt/rocksdb/' go build -o /usr/bin/blockbook -ldflags='-s -w -X github.com/trezor/blockbook/common.version=0.4.0 -X github.com/trezor/blockbook/common.gitcommit=f4d06ab -X github.com/trezor/blockbook/common.buildtime=2023-12-05T10:58:21+00:00'
 
 FROM ubuntu:22.04
-RUN apt-get update && apt-get upgrade -y && apt-get install -y libevent-dev libsnappy1v5 libzmq5 wget && apt-get clean
+RUN apt-get update && apt-get upgrade -y && apt-get install -y libevent-dev libsnappy1v5 libzmq5 supervisor wget && apt-get clean
 RUN wget -O- 'https://bitcoincore.org/bin/bitcoin-core-26.0/bitcoin-26.0-x86_64-linux-gnu.tar.gz' | tar xz -C /usr/bin/ 'bitcoin-26.0/bin/bitcoind' --strip-components=2
 COPY --from=builder /usr/local/bin/tor /usr/bin/tor
 COPY --from=builder /usr/bin/blockbook /usr/bin/blockbook
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY torrc /etc/tor/torrc
 COPY bitcoin.conf /etc/bitcoin/bitcoin.conf
 COPY blockchaincfg.json /etc/blockbook/blockchaincfg.json
+COPY testnet3/supervisord.conf /etc/supervisor/conf.d/testnet3/supervisord.conf
 COPY testnet3/torrc /etc/tor/testnet3/torrc
 COPY testnet3/bitcoin.conf /etc/bitcoin/testnet3/bitcoin.conf
 COPY testnet3/blockchaincfg.json /etc/blockbook/testnet3/blockchaincfg.json
@@ -27,8 +29,4 @@ COPY base.html /home/ubuntu/static/templates/
 COPY index.html /home/ubuntu/static/templates/
 RUN rm /home/ubuntu/static/favicon.ico
 ENV TESTNET=
-ENTRYPOINT \
-	tor -f /etc/tor${TESTNET:+/testnet3}/torrc & \
-	bitcoind -conf=/etc/bitcoin${TESTNET:+/testnet3}/bitcoin.conf -nodebuglogfile & \
-	blockbook -blockchaincfg=/etc/blockbook${TESTNET:+/testnet3}/blockchaincfg.json -datadir=/home/ubuntu/datadir/blockbook${TESTNET:+/testnet3}/ -enablesubnewtx -extendedindex -logtostderr -public=127.0.0.1:${TESTNET:+1}9130 -sync -workers=1 & \
-	wait
+ENTRYPOINT supervisord -c /etc/supervisor/conf.d${TESTNET:+/testnet3}/supervisord.conf

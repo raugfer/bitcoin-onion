@@ -5,8 +5,6 @@ USAGE="usage: $0 [--testnet]"
 [ "$1" = "--testnet" ] && TESTNET="t"
 docker inspect $TESTNET"bitcoin" > /dev/null || exit 1
 docker stop -t 60 $TESTNET"bitcoin" > /dev/null &
-docker exec $TESTNET"bitcoin" pkill blockbook
-docker exec $TESTNET"bitcoin" pkill bitcoind
-docker exec $TESTNET"bitcoin" pkill tor
+docker exec $TESTNET"bitcoin" pkill supervisord
 wait
 docker rm -f $TESTNET"bitcoin" > /dev/null 2>&1 || true
