@@ -32,8 +32,8 @@ RUN useradd -U -m ubuntu
 USER ubuntu
 WORKDIR /home/ubuntu/
 COPY --from=builder_blockbook --chown=ubuntu:ubuntu /opt/blockbook/static/ /home/ubuntu/static/
-COPY base.html /home/ubuntu/static/templates/
-COPY index.html /home/ubuntu/static/templates/
+COPY static/base.html /home/ubuntu/static/templates/
+COPY static/index.html /home/ubuntu/static/templates/
 RUN rm /home/ubuntu/static/favicon.ico
 ENV TESTNET=
 ENTRYPOINT supervisord -c /etc/supervisor/conf.d${TESTNET:+/testnet3}/supervisord.conf
