@@ -20,14 +20,14 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y libevent-2.1-7 li
 COPY --from=builder_tor /usr/local/bin/tor /usr/bin/tor
 COPY --from=builder_bitcoind /usr/local/bin/bitcoind /usr/bin/bitcoind
 COPY --from=builder_blockbook /usr/bin/blockbook /usr/bin/blockbook
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY torrc /etc/tor/torrc
-COPY bitcoin.conf /etc/bitcoin/bitcoin.conf
-COPY blockchaincfg.json /etc/blockbook/blockchaincfg.json
-COPY testnet3/supervisord.conf /etc/supervisor/conf.d/testnet3/supervisord.conf
-COPY testnet3/torrc /etc/tor/testnet3/torrc
-COPY testnet3/bitcoin.conf /etc/bitcoin/testnet3/bitcoin.conf
-COPY testnet3/blockchaincfg.json /etc/blockbook/testnet3/blockchaincfg.json
+COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY config/torrc /etc/tor/torrc
+COPY config/bitcoin.conf /etc/bitcoin/bitcoin.conf
+COPY config/blockchaincfg.json /etc/blockbook/blockchaincfg.json
+COPY config/testnet3/supervisord.conf /etc/supervisor/conf.d/testnet3/supervisord.conf
+COPY config/testnet3/torrc /etc/tor/testnet3/torrc
+COPY config/testnet3/bitcoin.conf /etc/bitcoin/testnet3/bitcoin.conf
+COPY config/testnet3/blockchaincfg.json /etc/blockbook/testnet3/blockchaincfg.json
 RUN useradd -U -m ubuntu
 USER ubuntu
 WORKDIR /home/ubuntu/
