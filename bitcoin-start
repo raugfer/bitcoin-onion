@@ -10,4 +10,4 @@ docker build -q -t bitcoin:0.26.0 $FOLDER > /dev/null || exit 1
 mkdir -p $FOLDER/datadir/bitcoin/ $FOLDER/datadir/blockbook/ $FOLDER/datadir/onion/
 chmod -f 700 $FOLDER/datadir/onion/
 rm -f $FOLDER/datadir/bitcoin/onion_v3_private_key $FOLDER/datadir/bitcoin/testnet3/onion_v3_private_key
-docker run $DAEMON --dns 0.0.0.0 --name $TESTNET"bitcoin" --hostname $TESTNET"bitcoin" -v $FOLDER/datadir/:/home/ubuntu/datadir/ -e TESTNET=$TESTNET bitcoin:0.26.0
+docker run $DAEMON --memory=896M --dns 0.0.0.0 --name $TESTNET"bitcoin" --hostname $TESTNET"bitcoin" -v $FOLDER/datadir/:/home/ubuntu/datadir/ -e TESTNET=$TESTNET bitcoin:0.26.0
